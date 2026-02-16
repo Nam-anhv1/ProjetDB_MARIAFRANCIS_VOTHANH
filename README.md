@@ -31,7 +31,8 @@ Ton entreprise veut appliquer MERISE pour concevoir un système d'information. T
 D’abord, établis les règles de gestions des données de ton entreprise, sous la forme d'une liste à puce. Elle doit correspondre aux informations que fournit quelqu’un qui connaît le fonctionnement de l’entreprise, mais pas comment se construit un système d’information.
 Ensuite, à partir de ces règles, fournis un dictionnaire de données brutes avec les colonnes suivantes, regroupées dans un tableau : signification de la donnée, type, taille en nombre de caractères ou de chiffres. Il doit y avoir entre 25 et 35 données. Il sert à fournir des informations supplémentaires sur chaque donnée (taille et type) mais sans a priori sur comment les données vont être modélisées ensuite.
 Fournis donc les règles de gestion et le dictionnaire de données.
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+__________________________________________________________________________________________________________________________________________________________________________________
 
 #REPONSE DE L'IAG : 
 
@@ -49,5 +50,4 @@ ________________________________________________________________________________
 
 
 
-<img width="454" height="707" alt="image" src="https://github.com/user-attachments/assets/5be4a3f6-3dfc-43da-9b4e-19a7ed252c0d" />
 
