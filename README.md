@@ -104,78 +104,59 @@ reprompt : plus une version MERISE
 
 Reponse de l'ia : 
 
-Voici une version plus conforme à la méthode MERISE pour l'analyse de la phase "Données" du système d'information de gestion d'agence immobilière. Elle intègre les standards MERISE : règles de gestion exprimées comme des choix fonctionnels et organisationnels, et dictionnaire des données avec colonnes étendues (identifiant, nom complet, signification, type, taille, occurrence min/max, et occurrence pour clés étrangères où applicable).
+Voici une version plus conforme à la méthode MERISE pour l'analyse de la phase "Données" du système d'information de gestion d'agence immobilière. Elle intègre les standards MERISE : règles de gestion exprimées comme des choix fonctionnels et organisationnels, et dictionnaire des données avec colonnes étendues (identifiant, nom complet, signification, type, taille, occurrence min/max, et occurrence pour clés étrangères où applicable). [cours-gratuit](https://www.cours-gratuit.com/cours-merise/cours-informatique-merise-le-dictionnaire-des-donnees)
 
-Règles de gestion (choix de gestion)
-Un bien immobilier est géré exclusivement par un propriétaire unique ; un propriétaire peut confier plusieurs biens à l'agence.
+## Règles de gestion (choix de gestion)
+- Un bien immobilier est géré exclusivement par un propriétaire unique ; un propriétaire peut confier plusieurs biens à l'agence.
+- Un mandat lie un bien à un propriétaire avec durée limitée (3 mois max, renouvelable explicitement) ; plusieurs mandats successifs par bien possible sans chevauchement.
+- Une visite associe un client à un bien via un agent le jour même ; plusieurs visites par client/bien, bon de visite signé obligatoire sans honoraires immédiats.
+- Un contrat (location ou vente) est signé entre un client et un propriétaire pour un bien unique ; un bien n'a qu'un contrat actif à la fois.
+- Les paiements concernent un contrat spécifique ; plusieurs paiements par contrat (mensuels pour loyers).
+- Un agent gère plusieurs visites/contrats ; commissions calculées post-encaissement sur honoraires du mandat.
+- Historique des visites et contrats conservé 5 ans ; documents archivés par statut (actif/expiré).
+- Clients et propriétaires distincts ; un individu peut être les deux sans fusion.
+- Biens vacants listables pour matching automatique avec critères clients (budget, surface).
+- Conformité loi Hoguet : tous mandats/contrats numérotés chronologiquement, registre tenu 2 ans. [mickael-martin-nevot](https://www.mickael-martin-nevot.com/emse/ismin/utilisation-des-bases-de-donnees/s37-td1-merise-modele-conceptuel-de-donnees-et-schema-relationnel.pdf)
 
-Un mandat lie un bien à un propriétaire avec durée limitée (3 mois max, renouvelable explicitement) ; plusieurs mandats successifs par bien possible sans chevauchement.
+## Dictionnaire des données
 
-Une visite associe un client à un bien via un agent le jour même ; plusieurs visites par client/bien, bon de visite signé obligatoire sans honoraires immédiats.
-
-Un contrat (location ou vente) est signé entre un client et un propriétaire pour un bien unique ; un bien n'a qu'un contrat actif à la fois.
-
-Les paiements concernent un contrat spécifique ; plusieurs paiements par contrat (mensuels pour loyers).
-
-Un agent gère plusieurs visites/contrats ; commissions calculées post-encaissement sur honoraires du mandat.
-
-Historique des visites et contrats conservé 5 ans ; documents archivés par statut (actif/expiré).
-
-Clients et propriétaires distincts ; un individu peut être les deux sans fusion.
-
-Biens vacants listables pour matching automatique avec critères clients (budget, surface).
-
-Conformité loi Hoguet : tous mandats/contrats numérotés chronologiquement, registre tenu 2 ans.
-
-Dictionnaire des données
-Identifiant	Nom	Signification	Type	Taille	Occ min	Occ max
-B001	ID_BIEN	Clé unique du bien immobilier	AN	10	1	1
-B002	ADRESSE_BIEN	Adresse complète (rue, CP, ville)	AN	100	1	1
-B003	TYPE_BIEN	Catégorie (appart., maison, terrain)	A	20	1	1
-B004	SURFACE	Surface habitable en m²	N	5,2	1	1
-B005	NB_PIECES	Nombre de pièces principales	N	2	1	1
-B006	ETAGE	Niveau (RDC, 1er, etc.)	N	2	0	1
-B007	PRIX_VENTE	Prix de vente TTC en €	N	10,2	0	1
-B008	LOYER_MENSUEL	Loyer mensuel en €	N	8,2	0	1
-P001	ID_PROPRIETAIRE	Clé unique du propriétaire	AN	10	1	1
-P002	NOM_PROP	Nom de famille	A	50	1	1
-P003	PRENOM_PROP	Prénom	A	50	1	1
-P004	DATE_NAIS_PROP	Date de naissance	D	JJ/MM/AA	1	1
-P005	TEL_PROP	Téléphone principal	N	15	1	1
-P006	EMAIL_PROP	Adresse email	AN	100	0	1
-C001	ID_CLIENT	Clé unique du client (locataire/acheteur)	AN	10	1	1
-C002	NOM_CLIENT	Nom de famille	A	50	1	1
-C003	PRENOM_CLIENT	Prénom	A	50	1	1
-C004	TEL_CLIENT	Téléphone	N	15	1	1
-C005	EMAIL_CLIENT	Email	AN	100	0	1
-C006	BUDGET_MAX	Budget max recherché en €	N	10,2	0	1
-M001	ID_MANDAT	Clé unique du mandat	AN	10	1	1
-M002	TYPE_MANDAT	Simple/exclusif/semi	A	15	1	1
-M003	DATE_DEBUT	Début validité	D	JJ/MM/AA	1	1
-M004	DATE_FIN	Fin validité	D	JJ/MM/AA	1	1
-M005	HONORAIRES	% ou montant fixe	AN	20	1	1
-V001	ID_VISITE	Clé unique visite	AN	10	1	1
-V002	DATE_VISITE	Date et heure	DH	JJ/MM/AA HH:MM	1	1
-T001	ID_CONTRAT	Clé unique contrat	AN	10	1	1
-T002	TYPE_CONTRAT	Location/vente/compromis	A	15	1	1
-T003	DATE_SIGNATURE	Date signature	D	JJ/MM/AA	1	1
-PA001	ID_PAIEMENT	Clé unique paiement	AN	10	1	1
-PA002	MONTANT	Somme en €	N	10,2	1	1
-PA003	DATE_PAIE	Date encaissement	D	JJ/MM/AA	1	1
-A001	ID_AGENT	Clé unique agent	AN	10	1	1
-A002	NOM_AGENT	Nom complet	A	50	1	1
-D001	ID_DOCUMENT	Clé unique document admin	AN	10	1	1
-D002	TYPE_DOC	Mandat/contrat/quittance/DPE	A	20	1	1
-D003	DATE_EMISSION	Date création	D	JJ/MM/AA	1	1 
-
-
-
-
-
-
-
-
-
-
-
-
+| Identifiant | Nom | Signification | Type | Taille | Occ min | Occ max |
+|-------------|-----|---------------|------|--------|---------|---------|
+| B001 | ID_BIEN | Clé unique du bien immobilier | AN | 10 | 1 | 1 |
+| B002 | ADRESSE_BIEN | Adresse complète (rue, CP, ville) | AN | 100 | 1 | 1 |
+| B003 | TYPE_BIEN | Catégorie (appart., maison, terrain) | A | 20 | 1 | 1 |
+| B004 | SURFACE | Surface habitable en m² | N | 5,2 | 1 | 1 |
+| B005 | NB_PIECES | Nombre de pièces principales | N | 2 | 1 | 1 |
+| B006 | ETAGE | Niveau (RDC, 1er, etc.) | N | 2 | 0 | 1 |
+| B007 | PRIX_VENTE | Prix de vente TTC en € | N | 10,2 | 0 | 1 |
+| B008 | LOYER_MENSUEL | Loyer mensuel en € | N | 8,2 | 0 | 1 |
+| P001 | ID_PROPRIETAIRE | Clé unique du propriétaire | AN | 10 | 1 | 1 |
+| P002 | NOM_PROP | Nom de famille | A | 50 | 1 | 1 |
+| P003 | PRENOM_PROP | Prénom | A | 50 | 1 | 1 |
+| P004 | DATE_NAIS_PROP | Date de naissance | D | JJ/MM/AA | 1 | 1 |
+| P005 | TEL_PROP | Téléphone principal | N | 15 | 1 | 1 |
+| P006 | EMAIL_PROP | Adresse email | AN | 100 | 0 | 1 |
+| C001 | ID_CLIENT | Clé unique du client (locataire/acheteur) | AN | 10 | 1 | 1 |
+| C002 | NOM_CLIENT | Nom de famille | A | 50 | 1 | 1 |
+| C003 | PRENOM_CLIENT | Prénom | A | 50 | 1 | 1 |
+| C004 | TEL_CLIENT | Téléphone | N | 15 | 1 | 1 |
+| C005 | EMAIL_CLIENT | Email | AN | 100 | 0 | 1 |
+| C006 | BUDGET_MAX | Budget max recherché en € | N | 10,2 | 0 | 1 |
+| M001 | ID_MANDAT | Clé unique du mandat | AN | 10 | 1 | 1 |
+| M002 | TYPE_MANDAT | Simple/exclusif/semi | A | 15 | 1 | 1 |
+| M003 | DATE_DEBUT | Début validité | D | JJ/MM/AA | 1 | 1 |
+| M004 | DATE_FIN | Fin validité | D | JJ/MM/AA | 1 | 1 |
+| M005 | HONORAIRES | % ou montant fixe | AN | 20 | 1 | 1 |
+| V001 | ID_VISITE | Clé unique visite | AN | 10 | 1 | 1 |
+| V002 | DATE_VISITE | Date et heure | DH | JJ/MM/AA HH:MM | 1 | 1 |
+| T001 | ID_CONTRAT | Clé unique contrat | AN | 10 | 1 | 1 |
+| T002 | TYPE_CONTRAT | Location/vente/compromis | A | 15 | 1 | 1 |
+| T003 | DATE_SIGNATURE | Date signature | D | JJ/MM/AA | 1 | 1 |
+| PA001 | ID_PAIEMENT | Clé unique paiement | AN | 10 | 1 | 1 |
+| PA002 | MONTANT | Somme en € | N | 10,2 | 1 | 1 |
+| PA003 | DATE_PAIE | Date encaissement | D | JJ/MM/AA | 1 | 1 |
+| A001 | ID_AGENT | Clé unique agent | AN | 10 | 1 | 1 |
+| A002 | NOM_AGENT | Nom complet | A | 50 | 1 | 1 |
+| D001 | ID_DOCUMENT | Clé unique document admin | AN | 10 | 1 | 1 |
+| D002 | TYPE_DOC | Mandat/contrat/quittance/DPE | A | 20 | 1 | 1 |
+| D003 | DATE_EMISSION | Date création | D | JJ/MM/AA | 1 | 1  [cours-gratuit](https://www.cours-gratuit.com/cours-merise/cours-informatique-merise-le-dictionnaire-des-donnees). |
