@@ -159,4 +159,10 @@ Voici une version plus conforme à la méthode MERISE pour l'analyse de la phase
 | A002 | NOM_AGENT | Nom complet | A | 50 | 1 | 1 |
 | D001 | ID_DOCUMENT | Clé unique document admin | AN | 10 | 1 | 1 |
 | D002 | TYPE_DOC | Mandat/contrat/quittance/DPE | A | 20 | 1 | 1 |
-| D003 | DATE_EMISSION | Date création | D | JJ/MM/AA | 1 | 1  [cours-gratuit](https://www.cours-gratuit.com/cours-merise/cours-informatique-merise-le-dictionnaire-des-donnees). |
+| D003 | DATE_EMISSION | Date création | D | JJ/MM/AA | 1 | 1 |
+
+
+# Modèle MCD 
+
+<img width="911" height="829" alt="Capture d’écran 2026-02-27 à 14 46 24" src="https://github.com/user-attachments/assets/a68063ec-bc89-4400-9bdc-a7fe8ec9b2ca" />
+
